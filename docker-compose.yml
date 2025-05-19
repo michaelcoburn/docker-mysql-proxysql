@@ -1,6 +1,6 @@
 services:
   mysql1:
-    image: mysql:8.0.30
+    image: mysql:8.0.42
     container_name: mysql1
     ports: 
       - "13306:3306"
@@ -11,7 +11,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
   mysql2:
-    image: mysql:8.0.30
+    image: mysql:8.0.42
     container_name: mysql2
     ports: 
       - "13307:3306"
@@ -24,7 +24,7 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
   mysql3:
-    image: mysql:8.0.30
+    image: mysql:8.0.42
     container_name: mysql3
     ports: 
       - "13308:3306"
