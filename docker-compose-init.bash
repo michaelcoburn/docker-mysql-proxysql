@@ -2,9 +2,9 @@
 . constants
 
 printf "$BRIGHT"
-printf "##################################################################################\n"
-printf "# Starting MySQL / ProxySQL / Orchestrator / PMM Docker Cluster provisioner!     #\n"
-printf "##################################################################################\n"
+printf "##############################################################################\n"
+printf "# Starting MySQL / ProxySQL / Orchestrator / PMM Docker Cluster provisioner! #\n"
+printf "##############################################################################\n"
 printf "$NORMAL"
 
 docker-compose up -d
