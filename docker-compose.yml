@@ -36,9 +36,9 @@ services:
       - mysql1
     environment:
       - MYSQL_ROOT_PASSWORD=root
-  proxysql:
+  proxysql1:
     image: proxysql/proxysql:latest
-    container_name: proxysql
+    container_name: proxysql1
     ports:
       - "16033:6033"
       - "16032:6032"
@@ -49,6 +49,41 @@ services:
       - mysql1
       - mysql2
       - mysql3
+      - pmm
+    networks:
+      - frontend
+      - backend
+  proxysql2:
+    image: proxysql/proxysql:latest
+    container_name: proxysql2
+    ports:
+      - "26033:6033"
+      - "26032:6032"
+      - "26080:6080"
+    volumes:
+      - ./conf/proxysql/proxysql.cnf:/etc/proxysql.cnf
+    depends_on:
+      - mysql1
+      - mysql2
+      - mysql3
+      - proxysql1
+    networks:
+      - frontend
+      - backend
+  proxysql3:
+    image: proxysql/proxysql:latest
+    container_name: proxysql3
+    ports:
+      - "36033:6033"
+      - "36032:6032"
+      - "36080:6080"
+    volumes:
+      - ./conf/proxysql/proxysql.cnf:/etc/proxysql.cnf
+    depends_on:
+      - mysql1
+      - mysql2
+      - mysql3
+      - proxysql1
     networks:
       - frontend
       - backend
@@ -66,7 +101,7 @@ services:
       - mysql1
       - mysql2
       - mysql3
-      - proxysql
+      - proxysql1
     networks:
       - backend
   orc2:
@@ -83,7 +118,7 @@ services:
       - mysql1
       - mysql2
       - mysql3
-      - proxysql
+      - proxysql1
     networks:
       - backend
   orc3:
@@ -100,7 +135,7 @@ services:
       - mysql1
       - mysql2
       - mysql3
-      - proxysql
+      - proxysql1
     networks:
       - backend
     environment:
@@ -117,8 +152,6 @@ services:
       - backend
     volumes:
       - pmm-data:/srv
-    depends_on:
-      - proxysql
     environment:
       - GF_AUTH_ANONYMOUS=true
   pmm-client:
@@ -131,6 +164,7 @@ services:
       - ./conf/pmm-client/entrypoint.bash:/entrypoint.bash
     depends_on:
       - pmm
+      - proxysql1
     environment:
       - PMM_SERVER=https://pmm-server:443/
       - PMM_AGENT_SERVER_USERNAME=admin

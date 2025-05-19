@@ -11,6 +11,14 @@ do
 done
 printf "$LIME_YELLOW\n"
 
-printf "$POWDER_BLUE[$(date)] Configuring ProxySQL...$LIME_YELLOW\n"
-
+printf "$POWDER_BLUE[$(date)] Configuring ProxySQL on proxysql1...$LIME_YELLOW\n"
 mysql -uradmin -pradmin -h127.0.0.1 -P16032 < $(pwd)/conf/proxysql/config.sql
+
+printf "$POWDER_BLUE[$(date)] Configuring ProxySQL Cluster on proxysql1...$LIME_YELLOW\n"
+mysql -uradmin -pradmin -h127.0.0.1 -P16032 < $(pwd)/conf/proxysql/cluster.sql
+
+printf "$POWDER_BLUE[$(date)] Configuring ProxySQL Cluster on proxysql2...$LIME_YELLOW\n"
+mysql -uradmin -pradmin -h127.0.0.1 -P26032 < $(pwd)/conf/proxysql/cluster.sql
+
+printf "$POWDER_BLUE[$(date)] Configuring ProxySQL Cluster on proxysql3...$LIME_YELLOW\n"
+mysql -uradmin -pradmin -h127.0.0.1 -P36032 < $(pwd)/conf/proxysql/cluster.sql

@@ -14,17 +14,23 @@ done
 
 printf "$LIME_YELLOW\n"
 
-printf "$POWDER_BLUE[$(date)] Configuring mysql1 agent...$LIME_YELLOW\n"
-docker exec pmm-client pmm-admin add mysql --username=root --password=root --tls --tls-skip-verify --server-url=http://admin:admin@pmm-server --query-source=perfschema mysql1 mysql1:3306
+printf "$POWDER_BLUE[$(date)] Configuring mysql1 PMM agent...$LIME_YELLOW\n"
+docker exec pmm-client pmm-admin add mysql --username=root --password=root --query-source=perfschema mysql1 mysql1:3306
 
 printf "$POWDER_BLUE[$(date)] Configuring mysql2 PMM agent...$LIME_YELLOW\n"
-docker exec pmm-client pmm-admin add mysql --username=root --password=root --tls --tls-skip-verify --server-url=http://admin:admin@pmm-server --query-source=perfschema mysql2 mysql2:3306
+docker exec pmm-client pmm-admin add mysql --username=root --password=root --query-source=perfschema mysql2 mysql2:3306
 
 printf "$POWDER_BLUE[$(date)] Configuring mysql3 PMM agent...$LIME_YELLOW\n"
-docker exec pmm-client pmm-admin add mysql --username=root --password=root --tls --tls-skip-verify --server-url=http://admin:admin@pmm-server --query-source=perfschema mysql3 mysql3:3306
+docker exec pmm-client pmm-admin add mysql --username=root --password=root --query-source=perfschema mysql3 mysql3:3306
 
 printf "$POWDER_BLUE[$(date)] Configuring proxysql1 PMM agent...$LIME_YELLOW\n"
-docker exec pmm-client pmm-admin add proxysql --username=radmin --password=radmin --service-name=proxysql1 --host=proxysql --port=6032 --tls-skip-verify --server-url=http://admin:admin@pmm-server  
+docker exec pmm-client pmm-admin add proxysql --username=radmin --password=radmin --service-name=proxysql1 --host=proxysql1 --port=6032
+
+printf "$POWDER_BLUE[$(date)] Configuring proxysql2 PMM agent...$LIME_YELLOW\n"
+docker exec pmm-client pmm-admin add proxysql --username=radmin --password=radmin --service-name=proxysql2 --host=proxysql2 --port=6032
+
+printf "$POWDER_BLUE[$(date)] Configuring proxysql3 PMM agent...$LIME_YELLOW\n"
+docker exec pmm-client pmm-admin add proxysql --username=radmin --password=radmin --service-name=proxysql3 --host=proxysql3 --port=6032
 
 printf "${POWDER_BLUE}All provisioning actions have completed SUCCESSFULLY!$NORMAL\n"
 
