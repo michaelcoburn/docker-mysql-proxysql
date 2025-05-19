@@ -3,7 +3,7 @@
 
 printf "$BRIGHT"
 printf "##################################################################################\n"
-printf "# Stopping MySQL / ProxySQL / Orchestrator / PMM Docker Cluster instances!             #\n"
+printf "# Stopping MySQL / ProxySQL / Orchestrator / PMM Docker Cluster instances!       #\n"
 printf "##################################################################################\n"
 printf "$NORMAL"
 
